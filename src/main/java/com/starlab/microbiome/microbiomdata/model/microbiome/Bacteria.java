@@ -1,6 +1,7 @@
 package com.starlab.microbiome.microbiomdata.model.microbiome;
 
 
+import com.starlab.microbiome.microbiomdata.model.microbiome.converter.CategoryConverter;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,9 +12,8 @@ import java.math.BigInteger;
 @Table(name = "bacteria_information")
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Bacteria {
 
     @Id
@@ -26,6 +26,6 @@ public class Bacteria {
     @Column(nullable = false)
     private String code;
 
-    @Column(nullable = false)
+    @Convert(converter = CategoryConverter.class)
     private Category category;
 }

@@ -7,8 +7,8 @@ public enum Category implements CodeDescription{
     NORMAL("N", "중간균"),
     UNKNOWN("U", "모름");
 
-    private final String code;
-    private final String description;
+    private String code;
+    private String description;
 
     Category(String code, String description) {
         this.code = code;
