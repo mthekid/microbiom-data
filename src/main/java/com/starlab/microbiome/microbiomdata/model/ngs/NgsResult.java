@@ -1,10 +1,13 @@
-package com.starlab.microbiome.microbiomdata.model;
+package com.starlab.microbiome.microbiomdata.model.ngs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.starlab.microbiome.microbiomdata.model.Company;
+import com.starlab.microbiome.microbiomdata.model.User;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -17,7 +20,7 @@ public class NgsResult {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDate inspectedDate;
+    private LocalDateTime inspectedDate = LocalDateTime.now();
 
     @OneToOne
     @JoinColumn(name = "company_id")
@@ -26,4 +29,10 @@ public class NgsResult {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    private NgsResult(User user, Company company) {
+        this.user = user;
+        this.company = company;
+    }
 }

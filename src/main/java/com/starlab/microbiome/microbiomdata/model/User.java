@@ -1,5 +1,7 @@
 package com.starlab.microbiome.microbiomdata.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.starlab.microbiome.microbiomdata.model.ngs.NgsResult;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ public class User {
     private String medicalInfo;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<NgsResult> ngsResults = new ArrayList<>();
 
     @Builder

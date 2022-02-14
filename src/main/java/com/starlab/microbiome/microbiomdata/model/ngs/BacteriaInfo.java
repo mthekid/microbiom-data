@@ -1,4 +1,4 @@
-package com.starlab.microbiome.microbiomdata.model;
+package com.starlab.microbiome.microbiomdata.model.ngs;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
-public class BacteriaInfos {
+public class BacteriaInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,14 +24,12 @@ public class BacteriaInfos {
     @JoinColumn(name = "bacteria_id")
     private Bacteria bacteria;
 
-    private Long bacteriaNum;
-
-    @CreationTimestamp
-    private LocalDate inspectedDate;
+    private String bacteriaNum;
 
     @Builder
-    public BacteriaInfos(NgsResult ngsResult, Bacteria bacteria) {
+    public BacteriaInfo(NgsResult ngsResult, Bacteria bacteria, String bacteriaNum) {
         this.ngsResult = ngsResult;
         this.bacteria = bacteria;
+        this.bacteriaNum = bacteriaNum;
     }
 }

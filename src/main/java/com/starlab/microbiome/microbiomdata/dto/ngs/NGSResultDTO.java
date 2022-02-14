@@ -1,4 +1,4 @@
-package com.starlab.microbiome.microbiomdata.dto;
+package com.starlab.microbiome.microbiomdata.dto.ngs;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
