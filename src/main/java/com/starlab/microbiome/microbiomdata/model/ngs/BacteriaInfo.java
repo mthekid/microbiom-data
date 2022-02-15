@@ -1,5 +1,6 @@
 package com.starlab.microbiome.microbiomdata.model.ngs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,6 +19,7 @@ public class BacteriaInfo {
     // NGS 결과지 1: N 연결
     @ManyToOne
     @JoinColumn(name = "ngs_result_id")
+    @JsonIgnore
     private NgsResult ngsResult;
 
     @ManyToOne

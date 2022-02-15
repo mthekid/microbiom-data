@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -31,6 +32,37 @@ public class NGSResultService {
         User registeredUser = userRepo.findByNameAndEmail(name, email);
 
         log.info(" ngsResultService 계층 : 등록된 사용자의 이름 : " + registeredUser.getName() + " -> ");
+
+        List<NgsResult> ngsResults = ngsResultRepo.findAllByUser(registeredUser);
+
+        NgsResult registeredNgsResult = ngsResults.stream()
+                .sorted(Comparator.comparing(NgsResult::getInspectedDate).reversed())
+                .findFirst()
+                .get();
+
+        log.info("등록된 사용자의 최신 결과지 : " + registeredNgsResult.getId());
+
+        return registeredNgsResult;
+    }
+
+    public List<NgsResult> findAllResult(User registeredUser) {
+
+        log.info(" ngsResultService(User입력값) 계층 : 등록된 사용자의 이름 : " + registeredUser.getName() + " -> ");
+
+        List<NgsResult> ngsResults = ngsResultRepo.findAllByUser(registeredUser);
+
+        List<NgsResult> registeredNgsResults = ngsResults.stream()
+                .sorted(Comparator.comparing(NgsResult::getInspectedDate).reversed())
+                .collect(Collectors.toList());
+
+        log.info("등록된 사용자의 모든 결과지 처리 완료: " );
+
+        return registeredNgsResults;
+    }
+
+    public NgsResult findRecentResult(User registeredUser) {
+
+        log.info(" ngsResultService(User입력값) 계층 : 등록된 사용자의 이름 : " + registeredUser.getName() + " -> ");
 
         List<NgsResult> ngsResults = ngsResultRepo.findAllByUser(registeredUser);
 
